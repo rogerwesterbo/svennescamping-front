@@ -5,7 +5,6 @@ export default [
   route("/login", "routes/login.tsx"),
   route("/unauthorized", "routes/unauthorized.tsx"),
   route("/auth/callback", "routes/auth.callback.tsx"),
-  route("/help", "routes/help.tsx"),
   route("/transactions", "routes/transactions.tsx"),
   route("/profile", "routes/profile.tsx"),
   route("*", "routes/$.tsx"), // Catch-all route for unmatched paths
