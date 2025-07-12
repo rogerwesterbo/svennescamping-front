@@ -1,0 +1,97 @@
+{
+  "translation": {
+    "common": {
+      "loading": "Loading...",
+      "error": "Error",
+      "success": "Success",
+      "save": "Save",
+      "cancel": "Cancel",
+      "delete": "Delete",
+      "edit": "Edit",
+      "close": "Close",
+      "yes": "Yes",
+      "no": "No",
+      "search": "Search",
+      "filter": "Filter",
+      "back": "Back",
+      "next": "Next",
+      "previous": "Previous",
+      "submit": "Submit",
+      "reset": "Reset",
+      "tryAgain": "Try again"
+    },
+    "navigation": {
+      "home": "Home",
+      "transactions": "Transactions",
+      "profile": "Profile",
+      "signOut": "Sign Out",
+      "signIn": "Sign In",
+      "toggleTheme": "Toggle theme"
+    },
+    "auth": {
+      "welcome": "Welcome",
+      "signInWithGoogle": "Sign in with Google",
+      "signInRequired": "You need to sign in to access this page",
+      "signOutSuccess": "You have been signed out",
+      "signInError": "Error signing in",
+      "unauthorized": "Unauthorized",
+      "accessDenied": "Access denied"
+    },
+    "home": {
+      "title": "Home",
+      "welcome": "Welcome to Svennes Camping",
+      "description": "Your camping experience starts here"
+    },
+    "profile": {
+      "title": "Profile",
+      "userInfo": "User Information",
+      "email": "Email",
+      "name": "Name",
+      "image": "Profile Image",
+      "userId": "User ID",
+      "noAccessToken": "No access token available",
+      "fetchError": "Failed to fetch user information",
+      "googleUserInfo": "Google User Information",
+      "apiUserInfo": "API User Information",
+      "role": "Role",
+      "verified": "Verified",
+      "groups": "Groups",
+      "sessionExpires": "Session Expires",
+      "tokenExpires": "Token Expires",
+      "adminAccess": "Admin Access",
+      "accessToken": "Access Token",
+      "copyAccessToken": "Copy Access Token",
+      "copied": "Copied!",
+      "apiTestingUse": "(Use for API testing)"
+    },
+    "transactions": {
+      "title": "Transactions",
+      "amount": "Amount",
+      "date": "Date",
+      "description": "Description",
+      "type": "Type",
+      "status": "Status",
+      "category": "Category",
+      "actions": "Actions",
+      "noTransactions": "No transactions found",
+      "loadError": "Error loading transactions"
+    },
+    "error": {
+      "pageNotFound": "Page not found",
+      "somethingWentWrong": "Something went wrong",
+      "tryAgain": "Try again",
+      "goHome": "Go to home",
+      "networkError": "Network error",
+      "serverError": "Server error"
+    },
+    "app": {
+      "name": "Svennes Camping",
+      "description": "Camping experience"
+    },
+    "language": {
+      "norwegian": "Norwegian",
+      "english": "English",
+      "changeLanguage": "Change language"
+    }
+  }
+}

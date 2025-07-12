@@ -1,0 +1,343 @@
+@import "tailwindcss";
+@import "primereact/resources/themes/lara-light-cyan/theme.css";
+@import "primereact/resources/primereact.min.css";
+@import "primeicons/primeicons.css";
+
+@theme {
+  --font-sans:
+    "Inter", ui-sans-serif, system-ui, sans-serif, "Apple Color Emoji",
+    "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+}
+
+html,
+body {
+  background-color: white;
+  color: #111827;
+}
+
+html.dark,
+html.dark body {
+  background-color: #111827;
+  color: white;
+}
+
+/* Main content styling */
+main {
+  background-color: white;
+  color: #111827;
+}
+
+html.dark main {
+  background-color: #111827;
+  color: white;
+}
+
+/* PrimeReact Dark Mode Styling */
+html.dark .p-datatable {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-datatable .p-datatable-header {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-thead > tr > th {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background-color: #4b5563 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr > td {
+  border-color: #6b7280 !important;
+  color: white !important;
+}
+
+html.dark .p-datatable .p-datatable-footer {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-paginator {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-paginator .p-paginator-page,
+html.dark .p-paginator .p-paginator-next,
+html.dark .p-paginator .p-paginator-prev,
+html.dark .p-paginator .p-paginator-first,
+html.dark .p-paginator .p-paginator-last {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-paginator .p-paginator-page:hover,
+html.dark .p-paginator .p-paginator-next:hover,
+html.dark .p-paginator .p-paginator-prev:hover,
+html.dark .p-paginator .p-paginator-first:hover,
+html.dark .p-paginator .p-paginator-last:hover {
+  background-color: #6b7280 !important;
+}
+
+html.dark .p-paginator .p-paginator-page.p-highlight {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+html.dark .p-card {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-card .p-card-body {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-card .p-card-content {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-inputtext {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-inputtext:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+
+html.dark .p-button {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+html.dark .p-button:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+html.dark .p-button.p-button-outlined {
+  background-color: transparent !important;
+  color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+html.dark .p-button.p-button-outlined:hover {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+html.dark .p-tag {
+  color: white !important;
+}
+
+html.dark .p-tag.p-tag-success {
+  background-color: #10b981 !important;
+}
+
+html.dark .p-tag.p-tag-warning {
+  background-color: #f59e0b !important;
+}
+
+html.dark .p-tag.p-tag-danger {
+  background-color: #ef4444 !important;
+}
+
+html.dark .p-message {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-message.p-message-error {
+  background-color: #7f1d1d !important;
+  color: #fee2e2 !important;
+  border-color: #ef4444 !important;
+}
+
+html.dark .p-progressspinner .p-progressspinner-svg {
+  color: #3b82f6 !important;
+}
+
+/* Fix for datatable cell content */
+html.dark .p-datatable .p-datatable-tbody > tr > td .p-tag {
+  background-color: inherit !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr > td .p-button {
+  background-color: #4b5563 !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr > td .p-button:hover {
+  background-color: #6b7280 !important;
+}
+
+/* PrimeReact Dark Mode Styling */
+html.dark .p-datatable {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-datatable .p-datatable-header {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-thead > tr > th {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr:nth-child(even) {
+  background-color: #4b5563 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr:hover {
+  background-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-tbody > tr > td {
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-datatable .p-datatable-footer {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-paginator {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-paginator .p-paginator-page,
+html.dark .p-paginator .p-paginator-next,
+html.dark .p-paginator .p-paginator-prev,
+html.dark .p-paginator .p-paginator-first,
+html.dark .p-paginator .p-paginator-last {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-paginator .p-paginator-page:hover,
+html.dark .p-paginator .p-paginator-next:hover,
+html.dark .p-paginator .p-paginator-prev:hover,
+html.dark .p-paginator .p-paginator-first:hover,
+html.dark .p-paginator .p-paginator-last:hover {
+  background-color: #6b7280 !important;
+}
+
+html.dark .p-paginator .p-paginator-page.p-highlight {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+html.dark .p-card {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-card .p-card-body {
+  background-color: #374151 !important;
+  color: white !important;
+}
+
+html.dark .p-inputtext {
+  background-color: #4b5563 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-inputtext:focus {
+  border-color: #3b82f6 !important;
+  box-shadow: 0 0 0 1px #3b82f6 !important;
+}
+
+html.dark .p-button {
+  background-color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+html.dark .p-button:hover {
+  background-color: #2563eb !important;
+  border-color: #2563eb !important;
+}
+
+html.dark .p-button.p-button-outlined {
+  background-color: transparent !important;
+  color: #3b82f6 !important;
+  border-color: #3b82f6 !important;
+}
+
+html.dark .p-button.p-button-outlined:hover {
+  background-color: #3b82f6 !important;
+  color: white !important;
+}
+
+html.dark .p-tag {
+  color: white !important;
+}
+
+html.dark .p-tag.p-tag-success {
+  background-color: #10b981 !important;
+}
+
+html.dark .p-tag.p-tag-warning {
+  background-color: #f59e0b !important;
+}
+
+html.dark .p-tag.p-tag-danger {
+  background-color: #ef4444 !important;
+}
+
+html.dark .p-message {
+  background-color: #374151 !important;
+  color: white !important;
+  border-color: #6b7280 !important;
+}
+
+html.dark .p-message.p-message-error {
+  background-color: #7f1d1d !important;
+  color: #fee2e2 !important;
+  border-color: #ef4444 !important;
+}
+
+html.dark .p-progressspinner .p-progressspinner-svg {
+  color: #3b82f6 !important;
+}

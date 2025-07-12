@@ -1,0 +1,43 @@
+# Dependencies
+node_modules
+
+# Build outputs
+build
+dist
+.output
+
+# Package manager files
+package-lock.json
+yarn.lock
+pnpm-lock.yaml
+
+# Environment files
+.env
+.env.*
+
+# IDE files
+.vscode
+.idea
+
+# OS files
+.DS_Store
+Thumbs.db
+
+# Logs
+*.log
+logs
+
+# Cache directories
+.cache
+.parcel-cache
+.vite
+
+# Coverage reports
+coverage
+
+# Generated files
+*.min.js
+*.min.css
+
+# Helm charts (contain template syntax that Prettier can't parse)
+charts/**/*

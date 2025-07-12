@@ -1,0 +1,97 @@
+{
+  "translation": {
+    "common": {
+      "loading": "Laster...",
+      "error": "Feil",
+      "success": "Vellykket",
+      "save": "Lagre",
+      "cancel": "Avbryt",
+      "delete": "Slett",
+      "edit": "Rediger",
+      "close": "Lukk",
+      "yes": "Ja",
+      "no": "Nei",
+      "search": "Søk",
+      "filter": "Filter",
+      "back": "Tilbake",
+      "next": "Neste",
+      "previous": "Forrige",
+      "submit": "Send inn",
+      "reset": "Tilbakestill",
+      "tryAgain": "Prøv igjen"
+    },
+    "navigation": {
+      "home": "Hjem",
+      "transactions": "Transaksjoner",
+      "profile": "Profil",
+      "signOut": "Logg ut",
+      "signIn": "Logg inn",
+      "toggleTheme": "Veksle tema"
+    },
+    "auth": {
+      "welcome": "Velkommen",
+      "signInWithGoogle": "Logg inn med Google",
+      "signInRequired": "Du må logge inn for å få tilgang til denne siden",
+      "signOutSuccess": "Du har blitt logget ut",
+      "signInError": "Feil ved innlogging",
+      "unauthorized": "Ikke autorisert",
+      "accessDenied": "Tilgang nektet"
+    },
+    "home": {
+      "title": "Hjem",
+      "welcome": "Velkommen til Svennes Camping",
+      "description": "Din camping opplevelse starter her"
+    },
+    "profile": {
+      "title": "Profil",
+      "userInfo": "Brukerinformasjon",
+      "email": "E-post",
+      "name": "Navn",
+      "image": "Profilbilde",
+      "userId": "Bruker-ID",
+      "noAccessToken": "Ingen tilgangstoken tilgjengelig",
+      "fetchError": "Kunne ikke hente brukerinformasjon",
+      "googleUserInfo": "Google brukerinformasjon",
+      "apiUserInfo": "API brukerinformasjon",
+      "role": "Rolle",
+      "verified": "Verifisert",
+      "groups": "Grupper",
+      "sessionExpires": "Økt utløper",
+      "tokenExpires": "Token utløper",
+      "adminAccess": "Administrator tilgang",
+      "accessToken": "Tilgangstoken",
+      "copyAccessToken": "Kopier tilgangstoken",
+      "copied": "Kopiert!",
+      "apiTestingUse": "(Bruk til API testing)"
+    },
+    "transactions": {
+      "title": "Transaksjoner",
+      "amount": "Beløp",
+      "date": "Dato",
+      "description": "Beskrivelse",
+      "type": "Type",
+      "status": "Status",
+      "category": "Kategori",
+      "actions": "Handlinger",
+      "noTransactions": "Ingen transaksjoner funnet",
+      "loadError": "Feil ved lasting av transaksjoner"
+    },
+    "error": {
+      "pageNotFound": "Siden ble ikke funnet",
+      "somethingWentWrong": "Noe gikk galt",
+      "tryAgain": "Prøv igjen",
+      "goHome": "Gå til hjem",
+      "networkError": "Nettverksfeil",
+      "serverError": "Serverfeil"
+    },
+    "app": {
+      "name": "Svennes Camping",
+      "description": "Camping opplevelse"
+    },
+    "language": {
+      "norwegian": "Norsk",
+      "english": "Engelsk",
+      "changeLanguage": "Endre språk"
+    }
+  }
+}

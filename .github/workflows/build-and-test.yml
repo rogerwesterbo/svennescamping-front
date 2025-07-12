@@ -1,0 +1,50 @@
+name: Build and Test
+
+on:
+  push:
+    branches: ["*"]
+  pull_request:
+    branches: ["main", "master"]
+
+permissions:
+  contents: read
+
+jobs:
+  build-and-test:
+    name: Build and Test
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type checking
+        run: npm run typecheck
+
+      - name: Lint check
+        run: npm run lint
+
+      - name: Format check
+        run: npm run format:check
+
+      - name: Build
+        run: npm run build
+
+      - name: Run tests
+        run: |
+          if npm list --depth=0 | grep -q test; then
+            npm test
+          else
+            echo "No tests configured, skipping test step"
+          fi
+
+      - name: Quick security audit (high severity only)
+        run: npm audit --audit-level high || true

@@ -1,0 +1,217 @@
+name: Release
+
+on:
+  push:
+    tags:
+      - "v*"
+
+permissions:
+  contents: read
+  packages: write
+  security-events: write
+
+jobs:
+  security-scan:
+    name: Comprehensive Security Scan
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Run security audit
+        run: npm audit --audit-level=moderate
+
+      - name: Run Trivy vulnerability scanner
+        uses: aquasecurity/trivy-action@master
+        with:
+          scan-type: "fs"
+          scan-ref: "."
+          format: "sarif"
+          output: "trivy-results.sarif"
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-results.sarif"
+
+      - name: Initialize CodeQL
+        uses: github/codeql-action/init@v3
+        with:
+          languages: javascript
+
+      - name: Autobuild for CodeQL
+        uses: github/codeql-action/autobuild@v3
+
+      - name: Perform CodeQL Analysis
+        uses: github/codeql-action/analyze@v3
+
+  build:
+    name: Build
+    runs-on: ubuntu-latest
+    needs: security-scan
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+
+      - name: Install dependencies
+        run: npm ci
+
+      - name: Type checking
+        run: npm run typecheck
+
+      - name: Build
+        run: npm run build
+
+      - name: Cache build artifacts
+        uses: actions/cache@v4
+        with:
+          path: build/
+          key: ${{ runner.os }}-build-${{ github.sha }}
+
+  create-oci-image:
+    name: Create OCI Image
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Restore build artifacts
+        uses: actions/cache@v4
+        with:
+          path: build/
+          key: ${{ runner.os }}-build-${{ github.sha }}
+
+      - name: Set up Docker Buildx
+        uses: docker/setup-buildx-action@v3
+
+      - name: Extract metadata (tags, labels) for Docker
+        id: meta
+        uses: docker/metadata-action@v5
+        with:
+          images: ghcr.io/rogerwesterbo/svennescamping-front
+          tags: |
+            type=semver,pattern={{version}}
+            type=semver,pattern={{major}}.{{minor}}
+            type=semver,pattern={{major}}
+            type=sha
+
+      - name: Log in to GitHub Container Registry
+        uses: docker/login-action@v3
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Build and push Docker image
+        id: build
+        uses: docker/build-push-action@v5
+        with:
+          context: .
+          push: true
+          tags: ${{ steps.meta.outputs.tags }}
+          labels: ${{ steps.meta.outputs.labels }}
+          platforms: linux/amd64,linux/arm64
+          cache-from: type=gha
+          cache-to: type=gha,mode=max
+
+      - name: Run Trivy vulnerability scanner on released image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "ghcr.io/rogerwesterbo/svennescamping-front:latest"
+          format: "sarif"
+          output: "trivy-release-results.sarif"
+
+      - name: Upload Trivy scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-release-results.sarif"
+
+  create-chart-package:
+    name: Create and Push Helm Chart
+    needs: create-oci-image
+    runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.extract-version.outputs.version }}
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v4
+
+      - name: Set up Helm
+        uses: azure/setup-helm@v3
+        with:
+          version: "latest"
+          token: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Extract version
+        id: extract-version
+        run: |
+          VERSION="${{ github.ref_name }}"
+          VERSION="${VERSION#v*}"
+          echo "VERSION=$VERSION" >> $GITHUB_ENV
+          echo "version=$VERSION" >> $GITHUB_OUTPUT
+
+      - name: Install yq
+        run: |
+          sudo wget -qO /usr/local/bin/yq https://github.com/mikefarah/yq/releases/latest/download/yq_linux_amd64
+          sudo chmod +x /usr/local/bin/yq
+
+      - name: Update chart version and app version
+        run: |
+          VERSION="${{ steps.extract-version.outputs.version }}"
+
+          # Update Chart.yaml
+          yq eval ".version = \"$VERSION\" | .appVersion = \"$VERSION\"" -i charts/svennescamping-front/Chart.yaml
+
+          # Update values.yaml to use the new image tag
+          yq eval ".image.tag = \"$VERSION\"" -i charts/svennescamping-front/values.yaml
+
+          # Verify changes
+          echo "Chart.yaml updated:"
+          yq eval '.version, .appVersion' charts/svennescamping-front/Chart.yaml
+          echo "values.yaml updated:"
+          yq eval '.image.tag' charts/svennescamping-front/values.yaml
+
+      - name: Package Helm chart
+        run: |
+          VERSION="${{ steps.extract-version.outputs.version }}"
+          helm package charts/svennescamping-front
+
+      - name: Log in to GitHub Container Registry
+        run: |
+          echo "${{ secrets.GITHUB_TOKEN }}" | helm registry login ghcr.io -u ${{ github.actor }} --password-stdin
+
+      - name: Push Helm chart to OCI registry
+        run: |
+          VERSION="${{ steps.extract-version.outputs.version }}"
+          helm push svennescamping-front-${VERSION}.tgz oci://ghcr.io/rogerwesterbo/helm
+
+      - name: Run final security scan on versioned image
+        uses: aquasecurity/trivy-action@master
+        with:
+          image-ref: "ghcr.io/rogerwesterbo/svennescamping-front:${{ steps.extract-version.outputs.version }}"
+          format: "sarif"
+          output: "trivy-final-results.sarif"
+
+      - name: Upload final security scan results
+        uses: github/codeql-action/upload-sarif@v3
+        if: always()
+        with:
+          sarif_file: "trivy-final-results.sarif"
