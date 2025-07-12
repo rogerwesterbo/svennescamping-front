@@ -1,4 +1,4 @@
-import { useState, useEffect, useCallback } from "react";
+import { useState, useEffect } from "react";
 import { useAuth } from "~/lib/auth";
 import { ProtectedRoute } from "~/components/ProtectedRoute";
 import {

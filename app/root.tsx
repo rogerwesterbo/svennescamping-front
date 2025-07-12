@@ -7,7 +7,7 @@ import {
   ScrollRestoration,
 } from "react-router";
 import { PrimeReactProvider } from "primereact/api";
-import { StrictMode } from "react";
+import React, { StrictMode } from "react";
 
 import type { Route } from "./+types/root";
 import { ThemeProvider } from "./components/theme-provider";
