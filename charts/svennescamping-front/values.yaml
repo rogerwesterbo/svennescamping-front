@@ -66,7 +66,7 @@ ingress:
       nginx.ingress.kubernetes.io/ssl-redirect: 'false',
       cert-manager.io/cluster-issuer: 'letsencrypt-prod',
       kubernetes.io/tls-acme: 'true',
-      cert-manager.io/issue-temporary-certificate: 'true',
+      cert-manager.io/issue-temporary-certificate: 'true'
     }
   hosts:
     - host: oversikt.svennescamping.no
