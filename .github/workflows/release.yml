@@ -41,15 +41,15 @@ jobs:
       - name: Perform CodeQL Analysis
         uses: github/codeql-action/analyze@v3
 
-  build:
-    name: Build
-    runs-on: ubuntu-latest
+  build-and-push:
+    name: Build and Push OCI Image
     needs: security-scan
+    runs-on: ubuntu-latest
     steps:
       - name: Checkout code
         uses: actions/checkout@v4
 
-      - name: Setup Node.js
+      - name: Setup Node.js (for typecheck only)
         uses: actions/setup-node@v4
         with:
           node-version: "22"
@@ -60,29 +60,6 @@ jobs:
 
       - name: Type checking
         run: npm run typecheck
-
-      - name: Build
-        run: npm run build
-
-      - name: Cache build artifacts
-        uses: actions/cache@v4
-        with:
-          path: build/
-          key: ${{ runner.os }}-build-${{ github.sha }}
-
-  create-oci-image:
-    name: Create OCI Image
-    needs: build
-    runs-on: ubuntu-latest
-    steps:
-      - name: Checkout code
-        uses: actions/checkout@v4
-
-      - name: Restore build artifacts
-        uses: actions/cache@v4
-        with:
-          path: build/
-          key: ${{ runner.os }}-build-${{ github.sha }}
 
       - name: Set up Docker Buildx
         uses: docker/setup-buildx-action@v3
@@ -119,7 +96,7 @@ jobs:
 
   create-chart-package:
     name: Create and Push Helm Chart
-    needs: create-oci-image
+    needs: build-and-push
     runs-on: ubuntu-latest
     outputs:
       version: ${{ steps.extract-version.outputs.version }}
