@@ -45,9 +45,8 @@ spec:
               containerPort: {{ .Values.containerport }}
               protocol: TCP
           envFrom:
-            - configMapRef:
-                name: svennescamping-front-config
-                namespace: svennescamping
+            - secretRef:
+                name: svennescamping-front-secret
           {{- with .Values.startupProbe }}
           startupProbe:
             {{- toYaml . | nindent 12 }}

@@ -126,18 +126,6 @@ autoscaling:
   targetCPUUtilizationPercentage: 80
   # targetMemoryUtilizationPercentage: 80
 
-# Additional volumeMounts on the output Deployment definition.
-volumeMounts: 
-  - name: configvolume
-    mountPath: /configs
-    subPath: .env
-  
-# Additional volumes on the output Deployment definition.
-volumes: 
-  - name: configvolume
-    configMap:
-      name: svennescamping-front-config
-
 nodeSelector: {}
 
 tolerations: []
