@@ -14,6 +14,7 @@ import { ThemeProvider } from "./components/theme-provider";
 import { Navigation } from "./components/Navigation";
 import { AuthProvider } from "./lib/auth";
 import { LanguageProvider } from "./components/LanguageProvider";
+import { ScrollToTop } from "./components/ScrollToTop";
 import "./app.css";
 import "./i18n";
 
@@ -55,6 +56,7 @@ export default function App() {
         <LanguageProvider>
           <AuthProvider>
             <ThemeProvider>
+              <ScrollToTop />
               <Navigation />
               <main className="min-h-screen bg-white dark:bg-gray-900 text-gray-900 dark:text-white">
                 <Outlet />

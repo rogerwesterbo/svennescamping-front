@@ -20,14 +20,21 @@ i18n
   .init({
     resources,
     fallbackLng: "nb", // Default to Norwegian
-    lng: "nb", // Default language
+    lng: undefined, // Let language detector handle initial language
     debug: process.env.NODE_ENV === "development",
 
     detection: {
-      // Detection options
+      // Detection options - prioritize localStorage
       order: ["localStorage", "navigator", "htmlTag"],
       caches: ["localStorage"],
       lookupLocalStorage: "i18nextLng",
+      // Don't convert language codes
+      convertDetectedLanguage: (lng: string) => {
+        // Ensure we only accept our supported languages
+        if (lng.startsWith("no") || lng.startsWith("nb")) return "nb";
+        if (lng.startsWith("en")) return "en";
+        return "nb"; // Default fallback
+      },
     },
 
     interpolation: {

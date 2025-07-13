@@ -18,7 +18,8 @@
       "previous": "Previous",
       "submit": "Submit",
       "reset": "Reset",
-      "tryAgain": "Try again"
+      "tryAgain": "Try again",
+      "refresh": "Refresh"
     },
     "navigation": {
       "home": "Home",
@@ -69,12 +70,24 @@
       "amount": "Amount",
       "date": "Date",
       "description": "Description",
+      "product": "Product",
+      "source": "Source",
       "type": "Type",
       "status": "Status",
       "category": "Category",
       "actions": "Actions",
       "noTransactions": "No transactions found",
       "loadError": "Error loading transactions"
+    },
+    "products": {
+      "unknownProduct": "Unknown Product",
+      "Cabin": "Cabin",
+      "Caravan/motorhome/tent 1-2 pers": "Caravan/motorhome/tent 1-2 pers",
+      "Caravan/motorhome/tent 3 pers": "Caravan/motorhome/tent 3 pers",
+      "Caravan/motorhome/tent 4 pers": "Caravan/motorhome/tent 4 pers",
+      "Washing machine": "Washing machine",
+      "Bed linen": "Bed linen",
+      "Shower": "Shower"
     },
     "error": {
       "pageNotFound": "Page not found",

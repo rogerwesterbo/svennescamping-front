@@ -18,7 +18,8 @@
       "previous": "Forrige",
       "submit": "Send inn",
       "reset": "Tilbakestill",
-      "tryAgain": "Prøv igjen"
+      "tryAgain": "Prøv igjen",
+      "refresh": "Oppdater"
     },
     "navigation": {
       "home": "Hjem",
@@ -69,12 +70,24 @@
       "amount": "Beløp",
       "date": "Dato",
       "description": "Beskrivelse",
+      "product": "Produkt",
       "type": "Type",
+      "source": "Kilde",
       "status": "Status",
       "category": "Kategori",
       "actions": "Handlinger",
       "noTransactions": "Ingen transaksjoner funnet",
       "loadError": "Feil ved lasting av transaksjoner"
+    },
+    "products": {
+      "unknownProduct": "Ukjent produkt",
+      "Cabin": "Hytte",
+      "Caravan/motorhome/tent 1-2 pers": "Campingvogn/bobil/telt 1-2 pers",
+      "Caravan/motorhome/tent 3 pers": "Campingvogn/bobil/telt 3 pers",
+      "Caravan/motorhome/tent 4 pers": "Campingvogn/bobil/telt 4 pers",
+      "Washing machine": "Vaskemaskin",
+      "Bed linen": "Sengetøy",
+      "Shower": "Dusj"
     },
     "error": {
       "pageNotFound": "Siden ble ikke funnet",

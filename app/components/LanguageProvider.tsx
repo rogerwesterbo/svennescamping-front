@@ -6,7 +6,7 @@ export type Language = "nb" | "en";
 export interface LanguageContextValue {
   currentLanguage: Language;
   changeLanguage: (language: Language) => Promise<void>;
-  t: (key: string, options?: any) => string;
+  t: (key: string, options?: Record<string, unknown>) => string;
 }
 
 const LanguageContext = createContext<LanguageContextValue | undefined>(
@@ -15,45 +15,30 @@ const LanguageContext = createContext<LanguageContextValue | undefined>(
 
 export function LanguageProvider({ children }: { children: React.ReactNode }) {
   const { i18n, t } = useTranslation();
-  const [currentLanguage, setCurrentLanguage] = useState<Language>("nb");
+  const [currentLanguage, setCurrentLanguage] = useState<Language>(() => {
+    // Initialize with the current i18n language or default to 'nb'
+    const initialLang = i18n.language || "nb";
+    return ["nb", "en"].includes(initialLang)
+      ? (initialLang as Language)
+      : "nb";
+  });
 
   useEffect(() => {
-    // Initialize language from localStorage or browser detection
-    const initializeLanguage = () => {
-      let detectedLang: Language = "nb"; // Default to Norwegian
-
-      // Check localStorage first
-      const storedLang = localStorage.getItem("i18nextLng");
-      if (storedLang && ["nb", "en"].includes(storedLang)) {
-        detectedLang = storedLang as Language;
-      } else {
-        // Detect browser language
-        const browserLang = navigator.language.toLowerCase();
-        if (browserLang.startsWith("no") || browserLang.startsWith("nb")) {
-          detectedLang = "nb";
-        } else if (browserLang.startsWith("en")) {
-          detectedLang = "en";
-        }
-        // Default remains 'nb' for any other language
-      }
-
-      if (detectedLang !== i18n.language) {
-        i18n.changeLanguage(detectedLang);
-      }
-      setCurrentLanguage(detectedLang);
-    };
-
-    initializeLanguage();
-  }, [i18n]);
-
-  useEffect(() => {
-    // Update state when i18n language changes
+    // Sync state with i18n language changes
     const handleLanguageChange = (lng: string) => {
-      setCurrentLanguage(lng as Language);
-      // Update HTML lang attribute
-      document.documentElement.lang = lng === "nb" ? "no" : lng;
+      if (["nb", "en"].includes(lng)) {
+        setCurrentLanguage(lng as Language);
+        // Update HTML lang attribute
+        if (typeof window !== "undefined") {
+          document.documentElement.lang = lng === "nb" ? "no" : lng;
+        }
+      }
     };
 
+    // Set initial language from i18n
+    handleLanguageChange(i18n.language);
+
+    // Listen for language changes
     i18n.on("languageChanged", handleLanguageChange);
     return () => {
       i18n.off("languageChanged", handleLanguageChange);
@@ -62,9 +47,9 @@ export function LanguageProvider({ children }: { children: React.ReactNode }) {
 
   const changeLanguage = async (language: Language) => {
     try {
+      // i18next will automatically save to localStorage due to the detection config
       await i18n.changeLanguage(language);
-      localStorage.setItem("i18nextLng", language);
-      setCurrentLanguage(language);
+      // State will be updated via the languageChanged event handler
     } catch (error) {
       console.error("Error changing language:", error);
     }
