@@ -1,6 +1,6 @@
 import type { LoaderFunctionArgs } from "react-router";
 
-export function loader({ request }: LoaderFunctionArgs) {
+export function loader({}: LoaderFunctionArgs) {
   // Simple health check - return 200 OK with a basic status
   return new Response(
     JSON.stringify({
