@@ -29,6 +29,16 @@ RUN npm ci --only=production --omit=dev && \
 FROM base AS build-env
 WORKDIR /app
 
+# Accept build arguments for environment variables (fallback option)
+ARG VITE_API_BASE_URL
+ARG VITE_GOOGLE_CLIENT_ID
+ARG VITE_GOOGLE_CLIENT_SECRET
+
+# Set environment variables for build (if provided via build args)
+ENV VITE_API_BASE_URL=$VITE_API_BASE_URL
+ENV VITE_GOOGLE_CLIENT_ID=$VITE_GOOGLE_CLIENT_ID
+ENV VITE_GOOGLE_CLIENT_SECRET=$VITE_GOOGLE_CLIENT_SECRET
+
 # Copy package files and source code
 COPY package*.json ./
 COPY --from=development-dependencies-env /app/node_modules ./node_modules
