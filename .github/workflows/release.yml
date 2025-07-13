@@ -117,19 +117,6 @@ jobs:
           cache-from: type=gha
           cache-to: type=gha,mode=max
 
-      - name: Run Trivy vulnerability scanner on released image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: "ghcr.io/rogerwesterbo/svennescamping-front:latest"
-          format: "sarif"
-          output: "trivy-release-results.sarif"
-
-      - name: Upload Trivy scan results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: "trivy-release-results.sarif"
-
   create-chart-package:
     name: Create and Push Helm Chart
     needs: create-oci-image
@@ -188,16 +175,3 @@ jobs:
         run: |
           VERSION="${{ steps.extract-version.outputs.version }}"
           helm push svennescamping-front-${VERSION}.tgz oci://ghcr.io/rogerwesterbo/helm
-
-      - name: Run final security scan on versioned image
-        uses: aquasecurity/trivy-action@master
-        with:
-          image-ref: "ghcr.io/rogerwesterbo/svennescamping-front:${{ steps.extract-version.outputs.version }}"
-          format: "sarif"
-          output: "trivy-final-results.sarif"
-
-      - name: Upload final security scan results
-        uses: github/codeql-action/upload-sarif@v3
-        if: always()
-        with:
-          sarif_file: "trivy-final-results.sarif"
