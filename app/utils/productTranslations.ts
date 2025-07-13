@@ -8,7 +8,7 @@ export function useProductTranslation() {
 
   const translateProduct = (productKey: string) => {
     if (!productKey || productKey === "Unknown Product") {
-      return t("products.unknownProduct", "Unknown Product");
+      return t("products.unknownProduct");
     }
 
     // Try to get the translation, fallback to the original key if not found
