@@ -44,6 +44,10 @@ spec:
             - name: http
               containerPort: {{ .Values.containerport }}
               protocol: TCP
+          envFrom:
+            - configMapRef:
+                name: svennescamping-front-config
+                namespace: svennescamping
           {{- with .Values.livenessProbe }}
           livenessProbe:
             {{- toYaml . | nindent 12 }}
