@@ -60,7 +60,9 @@ COPY package*.json ./
 COPY --from=build-env /app/build ./build
 
 # Create app directory and set ownership
-RUN chown -R reactapp:nodejs /app
+RUN chown -R reactapp:nodejs /app && \
+    mkdir -p /tmp/app && \
+    chown -R reactapp:nodejs /tmp/app
 
 # Switch to non-root user
 USER reactapp
