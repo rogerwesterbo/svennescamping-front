@@ -47,19 +47,19 @@ spec:
           env:
             - name: API_BASE_URL
               valueFrom:
-                configMapKeyRef:
-                  name: svennescamping-front-config
-                  key: API_BASE_URL
+                secretKeyRef:
+                  name: svennescamping-front-secret
+                  key: VITE_API_BASE_URL
             - name: GOOGLE_CLIENT_ID
               valueFrom:
                 secretKeyRef:
                   name: svennescamping-front-secret
-                  key: GOOGLE_CLIENT_ID
+                  key: VITE_GOOGLE_CLIENT_ID
             - name: GOOGLE_CLIENT_SECRET
               valueFrom:
                 secretKeyRef:
                   name: svennescamping-front-secret
-                  key: GOOGLE_CLIENT_SECRET
+                  key: VITE_GOOGLE_CLIENT_SECRET
           {{- with .Values.startupProbe }}
           startupProbe:
             {{- toYaml . | nindent 12 }}

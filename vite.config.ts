@@ -9,6 +9,6 @@ export default defineConfig({
     noExternal: ["primereact", "primeicons"],
   },
   optimizeDeps: {
-    include: ["primereact/api", "primereact/**"],
+    include: ["primereact/api", "primereact/**", "quill", "chart.js"],
   },
 });
