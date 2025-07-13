@@ -1,5 +1,5 @@
 # Use specific Node.js version with Alpine for smaller attack surface
-FROM node:22.12-alpine3.20 AS base
+FROM node:24.1-alpine3.20 AS base
 
 # Install security updates and create non-root user
 RUN apk update && apk upgrade && \
