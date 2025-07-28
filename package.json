@@ -1,6 +1,7 @@
 {
   "name": "svennescamping-front",
   "private": true,
+  "version": "0.0.1",
   "type": "module",
   "scripts": {
     "build": "react-router build",
@@ -14,9 +15,9 @@
     "format:check": "prettier --check ."
   },
   "dependencies": {
-    "@react-router/node": "^7.6.3",
-    "@react-router/serve": "^7.6.3",
-    "axios": "^1.10.0",
+    "@react-router/node": "^7.7.1",
+    "@react-router/serve": "^7.7.1",
+    "axios": "^1.11.0",
     "chart.js": "^4.5.0",
     "i18next": "^25.3.2",
     "i18next-browser-languagedetector": "^8.2.0",
@@ -26,20 +27,20 @@
     "quill": "^2.0.3",
     "react": "^19.1.0",
     "react-dom": "^19.1.0",
-    "react-i18next": "^15.6.0",
-    "react-router": "^7.6.3"
+    "react-i18next": "^15.6.1",
+    "react-router": "^7.7.1"
   },
   "devDependencies": {
-    "@eslint/js": "^9.31.0",
-    "@react-router/dev": "^7.6.3",
+    "@eslint/js": "^9.32.0",
+    "@react-router/dev": "^7.7.1",
     "@tailwindcss/vite": "^4.1.11",
     "@types/axios": "^0.14.4",
     "@types/node": "^24",
     "@types/react": "^19.1.8",
     "@types/react-dom": "^19.1.6",
-    "@typescript-eslint/eslint-plugin": "^8.36.0",
-    "@typescript-eslint/parser": "^8.36.0",
-    "eslint": "^9.31.0",
+    "@typescript-eslint/eslint-plugin": "^8.38.0",
+    "@typescript-eslint/parser": "^8.38.0",
+    "eslint": "^9.32.0",
     "eslint-plugin-react": "^7.37.5",
     "eslint-plugin-react-hooks": "^5.2.0",
     "eslint-plugin-react-router": "^0.0.1",
@@ -47,7 +48,7 @@
     "prettier": "^3.6.2",
     "tailwindcss": "^4.1.11",
     "typescript": "^5.8.3",
-    "vite": "^7.0.4",
+    "vite": "^7.0.6",
     "vite-tsconfig-paths": "^5.1.4"
   }
 }
